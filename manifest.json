@@ -1,0 +1,9 @@
+{
+  "name": "Royal Secret Number Quest",
+  "short_name": "Royal Quest",
+  "start_url": "game.html",
+  "display": "standalone",
+  "background_color": "#1a0f1f",
+  "theme_color": "#d4af37",
+  "icons": []
+}

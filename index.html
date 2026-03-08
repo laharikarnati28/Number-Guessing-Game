@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Quest - Login</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .login-container {
+      max-width: 450px;
+      width: 90%;
+      margin: 10vh auto;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      padding: 3rem 2rem;
+      border-radius: 3rem;
+      border: 3px solid var(--royal-gold);
+      text-align: center;
+      box-shadow: var(--border-glow), 0 20px 40px rgba(0,0,0,0.6);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .login-container h1 {
+      font-family: var(--font-head);
+      font-size: 2.5rem;
+      color: var(--royal-gold);
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 0 #2e1b3c;
+    }
+    .login-container input {
+      width: 100%;
+      margin: 1.5rem 0;
+      background: #321f3a;
+      border: 2px solid #8a6e4e;
+      border-radius: 4rem;
+      padding: 1rem 2rem;
+      color: var(--text-light);
+      font-size: 1.2rem;
+      outline: none;
+      transition: 0.3s;
+    }
+    .login-container input:focus {
+      border-color: var(--royal-gold);
+      box-shadow: 0 0 30px gold;
+      transform: scale(1.02);
+    }
+    .login-container button {
+      width: 100%;
+      background: linear-gradient(145deg, #4a2b5a, #2e1b3a);
+      border: 2px solid var(--royal-gold);
+      color: var(--royal-gold);
+      padding: 1rem 2rem;
+      border-radius: 4rem;
+      font-weight: bold;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 0 #3a1e3a;
+    }
+    .login-container button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 0 #3a1e3a, 0 0 30px gold;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>⚜️ Royal Login ⚜️</h1>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Enter your noble name" required>
+      <button type="submit">Enter the Realm</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('username').value.trim();
+      if (name) {
+        // Save or update user
+        let user = JSON.parse(localStorage.getItem('royalUser')) || null;
+        if (!user || user.name !== name) {
+          user = { name, gamesWon: 0 };
+          localStorage.setItem('royalUser', JSON.stringify(user));
+        }
+        // Redirect to game page
+        window.location.href = 'game.html';
+      }
+    });
+  </script>
+</body>
+</html>

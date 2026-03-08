@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ Legendary Royal Secret Number Quest ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="grid-container">
+    <header>
+      <h1>⚜️ LEGENDARY ROYAL <br>SECRET NUMBER QUEST ⚜️</h1>
+      <p class="subtitle">🔮 Divine a number, seeker. ✨</p>
+      <div class="user-panel">
+        <span id="currentUserDisplay">Guest</span> | Level <span id="currentLevelDisplay">?</span>
+      </div>
+      <div class="settings-bar">
+        <button id="themeToggle" class="icon-btn" title="Toggle high contrast">🌓</button>
+        <button id="fontIncrease" class="icon-btn" title="Increase font size">A+</button>
+        <button id="fontDecrease" class="icon-btn" title="Decrease font size">A-</button>
+        <select id="languageSelect" class="icon-btn">
+          <option value="en">🇬🇧 English</option>
+          <option value="es">🇪🇸 Español</option>
+          <option value="fr">🇫🇷 Français</option>
+          <option value="de">🇩🇪 Deutsch</option>
+          <option value="zh">🇨🇳 中文</option>
+          <option value="ko">🇰🇷 한국어</option>
+          <option value="hi">🇮🇳 हिन्दी</option>
+        </select>
+        <label><input type="checkbox" id="timerModeToggle"> ⏱️ Timer mode</label>
+      </div>
+    </header>
+
+    <main class="game-card">
+      <h2>🗡️ THE CHAMBER OF SECRETS</h2>
+      <div class="flex-row">
+        <div class="input-group">
+          <label for="playerName">👤 YOUR NOBLE NAME</label>
+          <input type="text" id="playerName" class="royal-input" placeholder="Sir Lancelot" value="Mystic Knight">
+        </div>
+        <div class="input-group">
+          <label for="difficultySelect">⚔️ DIFFICULTY</label>
+          <select id="difficultySelect" class="royal-input">
+            <option value="50">Squire (1-50)</option>
+            <option value="100" selected>Knight (1-100)</option>
+            <option value="500">King (1-500)</option>
+          </select>
+        </div>
+      </div>
+
+      <form id="guessForm" novalidate>
+        <div class="flex-row" style="gap:0.5rem;">
+          <div class="input-group" style="flex:5;">
+            <label for="guessInput">🎲 YOUR GUESS</label>
+            <input type="number" id="guessInput" class="royal-input" min="1" max="100" step="1" required placeholder="e.g. 42">
+          </div>
+          <button type="button" id="voiceBtn" class="icon-btn" style="align-self:flex-end; margin-bottom:0.2rem;" title="Voice input">🎤</button>
+        </div>
+        <div class="button-row">
+          <button type="submit" class="royal-btn">🔎 GUESS</button>
+          <button type="button" class="royal-btn" id="oracleBtn">🌙 ORACLE (API)</button>
+          <button type="button" class="royal-btn" id="resetBtn">⚡ NEW QUEST</button>
+          <button type="button" class="royal-btn" id="hintBtn" disabled>🔮 HINT (0)</button>
+        </div>
+      </form>
+
+      <div class="daily-spin">
+        <button id="spinWheelBtn" class="royal-btn">🎡 DAILY SPIN (once per day)</button>
+        <div id="spinResult" class="spin-result"></div>
+      </div>
+
+      <div id="timerContainer" class="timer-container">
+        <div id="timerBar"></div>
+      </div>
+
+      <div class="hint-area" id="hintMessage">Await your first guess...</div>
+
+      <div class="stats-row">
+        <span>🔮 Oracle tokens: <strong id="tokenCount">0</strong></span>
+        <span>⚔️ Attempts: <strong id="attemptCount">0</strong></span>
+        <span>🏆 Best: <strong id="bestScoreDisplay">—</strong></span>
+      </div>
+
+      <section>
+        <h3>📜 Previous guesses</h3>
+        <div class="previous-guesses" id="guessHistory"></div>
+      </section>
+
+      <section>
+        <h3>🏅 ACHIEVEMENTS</h3>
+        <div id="badgeContainer" class="badge-container"></div>
+      </section>
+    </main>
+
+    <aside class="leaderboard">
+      <h2>🏅 HALL OF FAME</h2>
+      <table>
+        <thead><tr><th>Rank</th><th>Name</th><th>Attempts</th></tr></thead>
+        <tbody id="leaderboardBody"></tbody>
+      </table>
+
+      <h3>🌍 GLOBAL HALL OF FAME</h3>
+      <div id="globalLeaderboard" class="global-leaderboard">Loading...</div>
+
+      <h3>📅 DAILY QUEST</h3>
+      <div>Today's quest: <span id="dailyAttempted">Not attempted</span></div>
+
+      <!-- Mobile number pad (hidden on desktop) -->
+      <div id="numberPad" class="number-pad"></div>
+    </aside>
+
+    <footer>
+      <p>© Legendary Quest · 52 features · CORS-ready · SEO enchanted</p>
+      <button id="shareWinBtn" style="display: none;">📤 Share Victory</button>
+    </footer>
+  </div>
+
+  <canvas id="particleCanvas"></canvas>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(console.error);
+    }
+  </script>
+</body>
+</html>
